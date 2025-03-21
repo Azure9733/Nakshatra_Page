@@ -1,6 +1,6 @@
 import './App.css'
 import React, { useState, useRef } from 'react';
-import Navbar from './components/Navbar';
+import Navbar from './Components/Navbar';
 import ContactUs from './Components/ContactUs';
 import Footer from './Components/Footer';
 import img1 from '/asset/img_1.png';
