@@ -40,6 +40,7 @@
     height: auto;
     object-fit: contain;
     background-color: transparent;
+    min-width: 150px;
 }
 
 .navbar ul {
@@ -85,17 +86,27 @@
 @media screen and (max-width: 768px) {
     .navbar {
         padding: 0 20px;
+        justify-content: center;
+    }
+
+    .logo {
+        width: 150px;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
     }
 
     .hamburger {
         display: flex;
+        position: absolute;
+        right: 20px;
     }
 
     .navbar ul {
         position: fixed;
         top: 0;
         right: -100%;
-        width: 70%;
+        width: 50%;
         height: 100vh;
         background-color: black;
         flex-direction: column;
