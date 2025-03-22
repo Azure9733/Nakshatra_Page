@@ -82,6 +82,25 @@ function App() {
         setIsDragging(false);
     };
 
+    // Add touch event handlers
+    const handleTouchStart = (e) => {
+        setIsDragging(true);
+        setStartX(e.touches[0].pageX - scrollRef.current.offsetLeft);
+        setScrollLeft(scrollRef.current.scrollLeft);
+    };
+
+    const handleTouchMove = (e) => {
+        if (!isDragging) return;
+        e.preventDefault();
+        const x = e.touches[0].pageX - scrollRef.current.offsetLeft;
+        const walk = (x - startX) * 2;
+        scrollRef.current.scrollLeft = scrollLeft - walk;
+    };
+
+    const handleTouchEnd = () => {
+        setIsDragging(false);
+    };
+
     return (
         <div className="app">
             <Navbar />
@@ -165,6 +184,9 @@ function App() {
                         onMouseMove={handleMouseMove}
                         onMouseUp={handleMouseUp}
                         onMouseLeave={handleMouseLeave}
+                        onTouchStart={handleTouchStart}
+                        onTouchMove={handleTouchMove}
+                        onTouchEnd={handleTouchEnd}
                     >
                         {maps.map((map, index) => (
                             <div 
@@ -173,9 +195,9 @@ function App() {
                                 onClick={() => {
                                     if (!isDragging) {
                                         if (index === 0) {
-                                            window.open('./src/Components/azure9733.github.io/index.html', '_blank');
+                                            window.open('/src/Components/azure9733.github.io/index.html', '_blank');
                                         } else if (index === 1) {
-                                            window.open('./asset/MapMIT v2.0.pdf', '_blank');
+                                            window.open('/src/Components/MapMITv2.pdf', '_blank');
                                         }
                                     }
                                 }}
