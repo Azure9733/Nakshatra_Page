@@ -3,32 +3,34 @@ import React, { useState, useRef } from 'react';
 import Navbar from './Components/Navbar';
 import ContactUs from './Components/ContactUs';
 import Footer from './Components/Footer';
-import img1 from '/asset/img_1.png';
+import img1 from '/asset/image.png';
 import img2 from '/asset/img.png';
-import img3 from '/asset/gta_map.png';
-import img4 from '/asset/san_andreas_map.png';
+import img3 from '/asset/MapMitv2.png';
+
+
 
 function App() {
     const [openSection, setOpenSection] = useState(1);
     const [activeIndex, setActiveIndex] = useState(0);
     const scrollRef = useRef(null);
+    const [isDragging, setIsDragging] = useState(false);
+    const [startX, setStartX] = useState(0);
+    const [scrollLeft, setScrollLeft] = useState(0);
 
     const toggleSection = (sectionNumber) => {
         setOpenSection(openSection === sectionNumber ? null : sectionNumber);
     };
 
     const maps = [
-        { id: 1, title: "MapMIT", image: img1 },
-        { id: 2, title: "los Santos", image: img3 },
-        { id: 3, title: "San Andreas", image: img4 },
-        { id: 4, title: "Map 4", image: img1 },
+        { id: 1, title: "Revels WebMap", image: img1 },
+        { id: 2, title: "Map MIT", image: img3 },
     ];
 
     const scrollToMap = (direction) => {
         if (scrollRef.current) {
             const container = scrollRef.current;
             const cardWidth = container.children[0].offsetWidth;
-            const scrollAmount = cardWidth + 20; // 20 is the gap between cards
+            const scrollAmount = cardWidth + 20;
 
             if (direction === 'left') {
                 const newIndex = Math.max(0, activeIndex - 1);
@@ -58,6 +60,28 @@ function App() {
         }
     };
 
+    const handleMouseDown = (e) => {
+        setIsDragging(true);
+        setStartX(e.pageX - scrollRef.current.offsetLeft);
+        setScrollLeft(scrollRef.current.scrollLeft);
+    };
+
+    const handleMouseMove = (e) => {
+        if (!isDragging) return;
+        e.preventDefault();
+        const x = e.pageX - scrollRef.current.offsetLeft;
+        const walk = (x - startX) * 2;
+        scrollRef.current.scrollLeft = scrollLeft - walk;
+    };
+
+    const handleMouseUp = () => {
+        setIsDragging(false);
+    };
+
+    const handleMouseLeave = () => {
+        setIsDragging(false);
+    };
+
     return (
         <div className="app">
             <Navbar />
@@ -83,11 +107,14 @@ function App() {
                             <span className={`arrow ${openSection === 1 ? 'open' : ''}`}>▼</span>
                         </div>
                         <div className={`section-content ${openSection === 1 ? 'open' : ''}`}>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vel accumsan justo.
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam consequat porttitor velit,
-                                quis imperdiet magna pharetra a. Maecenas blandit efficitur quam. Pellentesque ornare
-                                sagittis elit eget porta. Curabitur interdum nisl a scelerisque ornare, odio ex pulvinar
-                                lorem, sed.</p>
+                            
+                        <p>1. We Provide Static High Detail Maps that allow user interaction, customization, and visualization in both 2D and 3D formats</p>
+                            
+                        <p>2. We also Provide Dynamic Digital Maps to interact with Map elements and customise Visualisation </p>   
+                            
+                        <p> 3. VR Enabled Maps: Virtual Reality (VR) maps create fully immersive 3D environments that users can explore using VR headsets. These are ideal for virtual tours, such as exploring a museum, a historical site, or a real estate property without being physically present</p>  
+
+                            
                         </div>
                     </div>
 
@@ -100,11 +127,7 @@ function App() {
                             <span className={`arrow ${openSection === 2 ? 'open' : ''}`}>▼</span>
                         </div>
                         <div className={`section-content ${openSection === 2 ? 'open' : ''}`}>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vel accumsan justo.
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam consequat porttitor velit,
-                                quis imperdiet magna pharetra a. Maecenas blandit efficitur quam. Pellentesque ornare
-                                sagittis elit eget porta. Curabitur interdum nisl a scelerisque ornare, odio ex pulvinar
-                                lorem, sed.</p>
+                            <p>This category focuses on mapping technologies designed for indoor environments, where traditional GPS often struggles due to signal limitations. Indoor mapping provides detailed layouts and navigation tools for spaces like buildings, malls, or airports..</p>
                         </div>
                     </div>
 
@@ -117,16 +140,13 @@ function App() {
                             <span className={`arrow ${openSection === 3 ? 'open' : ''}`}>▼</span>
                         </div>
                         <div className={`section-content ${openSection === 3 ? 'open' : ''}`}>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vel accumsan justo.
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam consequat porttitor velit,
-                                quis imperdiet magna pharetra a. Maecenas blandit efficitur quam. Pellentesque ornare
-                                sagittis elit eget porta. Curabitur interdum nisl a scelerisque ornare, odio ex pulvinar
-                                lorem, sed.</p>
+                            <p>This category involves real-time tracking and management of events within a mapped area, often for operational or safety purposes. It's focused on monitoring activities and responding to dynamic situations.</p>
                         </div>
                     </div>
                 </div>
 
                 <h2 className="section-title">Our Maps</h2>
+                <p className="coming-soon">More Coming Soon....</p>
                 
                 <div className="scroll-container">
                     <button 
@@ -141,11 +161,24 @@ function App() {
                         className="scroll-wrapper" 
                         ref={scrollRef}
                         onScroll={handleScroll}
+                        onMouseDown={handleMouseDown}
+                        onMouseMove={handleMouseMove}
+                        onMouseUp={handleMouseUp}
+                        onMouseLeave={handleMouseLeave}
                     >
                         {maps.map((map, index) => (
                             <div 
                                 key={map.id} 
                                 className={`map-card ${index === activeIndex ? 'active' : ''}`}
+                                onClick={() => {
+                                    if (!isDragging) {
+                                        if (index === 0) {
+                                            window.open('./src/Components/azure9733.github.io/index.html', '_blank');
+                                        } else if (index === 1) {
+                                            window.open('./asset/MapMIT v2.0.pdf', '_blank');
+                                        }
+                                    }
+                                }}
                             >
                                 <img src={map.image} alt={map.title} />
                                 <h3>{map.title}</h3>
