@@ -334,12 +334,11 @@
     transition: all 0.3s ease;
     position: relative;
     margin: 0 auto;
-    cursor: pointer;
+    cursor: grab;
 }
 
 .map-card:active {
     cursor: grabbing;
-    transition-delay: 0.1s;
 }
 
 .map-card.active {

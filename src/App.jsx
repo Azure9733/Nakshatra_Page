@@ -192,15 +192,6 @@ function App() {
                             <div 
                                 key={map.id} 
                                 className={`map-card ${index === activeIndex ? 'active' : ''}`}
-                                onClick={() => {
-                                    if (!isDragging) {
-                                        if (index === 0) {
-                                            window.open('/src/Components/azure9733.github.io/index.html', '_blank');
-                                        } else if (index === 1) {
-                                            window.open('/src/Components/MapMITv2.pdf', '_blank');
-                                        }
-                                    }
-                                }}
                             >
                                 <img src={map.image} alt={map.title} />
                                 <h3>{map.title}</h3>
