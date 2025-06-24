@@ -1,7 +1,6 @@
 {
   "name": "nakshatra-landing",
   "homepage": "https://github.com/Goutham100/Nakshatra-Page-New",
-
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -12,11 +11,9 @@
     "preview": "vite preview",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d docs"
-
-
-
   },
   "dependencies": {
+    "@formspree/react": "^3.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
@@ -32,4 +29,3 @@
     "vite": "^6.2.0"
   }
 }
-

@@ -438,10 +438,11 @@
     );
     border: 1px solid rgba(7, 215, 0, 0.3);
     border-radius: 12px;
-    box-shadow: 
+    box-shadow:
         0 0 20px rgba(0, 0, 0, 0.5),
         inset 0 0 30px rgba(7, 215, 0, 0.1);
-    max-width: 800px;
+    max-width: 1400px;
+
 
 }
 

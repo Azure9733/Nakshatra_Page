@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Navbar.css'
 import logo from "/asset/Front Pocket.png";
 
-function Navbar() {
+function Navbar({ onContactClick }) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const toggleMenu = () => {
@@ -21,7 +21,7 @@ function Navbar() {
                 <li>Home</li>
                 <li>Services</li>
                 <li>Demo</li>
-                <li>Contact Us</li>
+                <li onClick={onContactClick}>Contact Us</li>
             </ul>
         </div>
     );

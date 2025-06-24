@@ -6,7 +6,7 @@ import Footer from './Components/Footer';
 import img1 from '/asset/image.png';
 import img2 from '/asset/img.png';
 import img3 from '/asset/MapMitv2.png';
-
+import img4 from '/asset/MapMitv2.0.pdf';
 
 
 function App() {
@@ -16,6 +16,7 @@ function App() {
     const [isDragging, setIsDragging] = useState(false);
     const [startX, setStartX] = useState(0);
     const [scrollLeft, setScrollLeft] = useState(0);
+    const contactRef = useRef(null);
 
     const toggleSection = (sectionNumber) => {
         setOpenSection(openSection === sectionNumber ? null : sectionNumber);
@@ -101,9 +102,15 @@ function App() {
         setIsDragging(false);
     };
 
+    const handleContactClick = () => {
+        if (contactRef.current) {
+            contactRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
     return (
         <div className="app">
-            <Navbar />
+            <Navbar onContactClick={handleContactClick} />
             <div className="content">
                 <h1 className="neon-heading">
                     Revolutionizing<br/>
@@ -192,6 +199,18 @@ function App() {
                             <div 
                                 key={map.id} 
                                 className={`map-card ${index === activeIndex ? 'active' : ''}`}
+                                onClick={
+                                    map.title === "Revels WebMap"
+                                        ? () => window.open('https://mit.nakshatramaps.com/', '_blank')
+                                        : map.title === "Map MIT"
+                                            ? () => window.open(img4, '_blank')
+                                            : undefined
+                                }
+                                style={
+                                    map.title === "Revels WebMap" || map.title === "Map MIT"
+                                        ? { cursor: 'pointer' }
+                                        : {}
+                                }
                             >
                                 <img src={map.image} alt={map.title} />
                                 <h3>{map.title}</h3>
@@ -223,7 +242,9 @@ function App() {
                         ))}
                     </div>
                 </div>
-                <ContactUs />
+                <div ref={contactRef}>
+                    <ContactUs />
+                </div>
             </div>
             <Footer />
         </div>
