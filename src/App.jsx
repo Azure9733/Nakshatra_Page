@@ -6,7 +6,7 @@ import Footer from './Components/Footer';
 import img1 from '/asset/image.png';
 import img2 from '/asset/img.png';
 import img3 from '/asset/MapMitv2.png';
-import img4 from '/asset/MapMitv2.0.pdf';
+import img4 from '/asset/MapMIT.jpg';
 
 
 function App() {
