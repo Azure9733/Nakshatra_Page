@@ -8,7 +8,7 @@ const Footer = () => {
         <img src={logo} alt="Nakshatra Logo" className="footer-logo" />
         <div className="social-links">
           <a 
-            href="https://instagram.com" 
+            href="https://www.instagram.com/nakshatra.maps/"
             target="_blank" 
             rel="noopener noreferrer"
             className="social-icon"
